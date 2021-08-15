@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <p>Entre com a fração:</p>
+    <input id="input" />
+    <button id="calc">Calcular</button>
+    <span id="out"></span>
+  </body>
+  <script>
+    const btnCalc = document.getElementById("calc");
+    const saida = document.getElementById("out");
+
+    btnCalc.addEventListener("click", () => {
+      const entrada = document
+        .getElementById("input")
+        .value.toString()
+        .split("/");
+      if (entrada.length === 1 && entrada[0]) {
+        saida.innerHTML = entrada[0];
+      } else if (entrada.length === 2 && entrada[1] != 0) {
+        const above = parseInt(entrada[0]);
+        const below = parseInt(entrada[1]);
+        const inteiro = Math.trunc(above / below);
+        const rest = below % above;
+        if (above - inteiro * below > 0) {
+          if (rest === 0) {
+            saida.innerHTML =
+              (inteiro ? inteiro + " + " : "") +
+              (above - inteiro * below) / above +
+              "/" +
+              below / above;
+          } else {
+            saida.innerHTML =
+              (inteiro ? inteiro + " + " : "") +
+              (above - inteiro * below) +
+              "/" +
+              below;
+          }
+        } else {
+          saida.innerHTML = inteiro;
+        }
+      } else {
+        saida.innerHTML = "ERR";
+      }
+    });
+  </script>
+</html>
